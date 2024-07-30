@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+#modal {
+  width: 200px;
+  height: 200px;
+  line-height: 200px;
+  text-align: center;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid red;
+}
+</style>
+<body>
+  <button id="open">打开弹框</button>
+  <button id="close">关闭弹框</button>
+</body>
+<script>
+  // class的静态方法实现
+  class Modal {
+    static getInstance() {
+      if (!Modal.instance) {
+        Modal.instance = document.createElement('div')
+        Modal.instance.innerHTML = '我是全局唯一的Modal'
+        Modal.instance.id = 'modal'
+        Modal.instance.style.display = 'none'
+        document.body.appendChild(Modal.instance)
+      }
+      return Modal.instance
+    }
+    static open() {
+      Modal.getInstance().style.display = 'block'
+    }
+    static close() {
+      Modal.getInstance().style.display = 'none'
+    }
+  }
+
+  const openBtn = document.getElementById('open')
+  const closeBtn = document.getElementById('close')
+  openBtn.addEventListener('click', function() {
+    Modal.open()
+  })
+  closeBtn.addEventListener('click', function() {
+    Modal.close()
+  })
+</script>
+</html>
