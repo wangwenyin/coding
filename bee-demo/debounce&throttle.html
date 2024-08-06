@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" id="search">
+  </body>
+</html>
+<script>
+  // 防抖：一般采用setTimeout延迟写法
+  function debounce(fn, delay, immediate) {
+    let timer = null;
+    return function () {
+      const args = arguments;
+      clearTimeout(timer);
+      if (immediate) {
+        const doNow = !timer;
+        timer = setTimeout(function () {
+          timer = null;
+        }, delay);
+        if (doNow) {
+          fn.apply(this, args);
+        }
+      } else {
+        timer = setTimeout(() => {
+          fn.apply(this, args);
+        }, delay);
+      }
+    };
+  }
+
+ 
+  // 节流：一般采用时间戳写法
+  var throttle = function(fn, delay) {
+    let prev = Date.now();
+    console.log(prev);
+    
+    return function() {
+      const args = arguments;
+      const now = Date.now();
+      if (now - prev > delay) {
+        fn.apply(this, args);
+        prev = Date.now();
+      }
+    }
+  }
+
+  function foo() {
+    console.log("trigger");
+  }
+
+  window.addEventListener("resize", debounce2(foo, 10000, false));
+  // document.getElementById('search').addEventListener('input', throttle(foo, 2000));
+</script>

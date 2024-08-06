@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .box {
+      border: 1px solid blueviolet;
+    }
+    .clearfix::after {
+      display: block;
+      content: "";
+      clear: both;
+    }
+    .sx {
+      position: relative;
+      left: 0;
+      top: 0;
+      float: left;
+      width: 0;
+      height: 0;
+      border-width: 50px;
+      border-style: solid;
+      border-color: aqua transparent transparent;
+      border-radius: 50%;
+      animation: moveChangeColor ease-out 1s forwards;
+    }
+
+    @keyframes moveChangeColor {
+      from {
+        left: 0;
+        border-top-color: aqua;
+      }
+      to {
+        left: 50%;
+        border-top-color: blueviolet;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="box clearfix">
+    <div class="sx"></div>
+  </div>
+</body>
+</html>

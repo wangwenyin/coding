@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .light {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%
+    }
+  </style>
+</head>
+<body>
+  <div class="light"></div>
+</body>
+<!-- <script>
+  // 原生promise实现
+  const lightEle = document.querySelector('.light')
+  function changeLightColor(color, duration) {
+    return new Promise((resolve, reject) => {
+      lightEle.style.backgroundColor = color
+      setTimeout(resolve, duration);
+    })
+  }
+  function trafficLight() {
+    changeLightColor('green', 3000).then(() => {
+      return changeLightColor('yellow', 1000)
+    }).then(() => {
+      return changeLightColor('red', 2000)
+    }).then(() => {
+      trafficLight()
+    })
+  }
+  trafficLight()
+</script> -->
+<script>
+  // 2. 利用async/await实现交通灯效果
+  const lightEle = document.querySelector('.light')
+  function changeLightColor(color, duration) {
+    return new Promise((resolve, reject) => {
+      lightEle.style.backgroundColor = color
+      setTimeout(resolve, duration);
+    })
+  }
+  // async定义异步函数
+  async function trafficLight() {
+    // await异步等待，实现同步效果
+    await changeLightColor('green', 3000);
+    await changeLightColor('yellow', 1000);
+    await changeLightColor('red', 2000);
+    // 无限循环（递归的话会有条件出口），也可以while(true)循环
+    trafficLight();
+  }
+  trafficLight();
+</script>
+</html>

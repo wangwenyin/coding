@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<!-- 每秒更新当前时间 -->
+<body onload="setInterval(()=>document.body.innerHTML=new Date().toLocaleString().slice(10,19))"></body>
+</html>
+<script>
+  // function Person(name) {
+//   this.name = name
+// }
+// Person.prototype.introduceSelf = function() {
+//   console.log(`My name is ${this.name}`)
+// }
+// const p = new Person('wangwenyin')
+// console.log(p.introduceSelf())
+// ES6 class
+class Person {
+  constructor(name) {
+    this.name = name
+  }
+  introduceSelf() {
+    console.log(`My name is ${this.name}`)
+  }
+}
+console.log(new Person('Tom').introduceSelf())
+
+// 倒计时时间格式化
+function format_time(timeStamp) {
+  let day = Math.floor(timeStamp / (24 * 3600 * 1000));
+  let leave1 = timeStamp % (24 * 3600 * 1000);
+  let hours = Math.floor(leave1 / (3600 * 1000));
+  let leave2 = leave1 % (3600 * 1000);
+  let minutes = Math.floor(leave2 / (60 * 1000));
+  let leave3 = leave2 % (60 * 1000);
+  let seconds = Math.floor(leave3 / 1000);
+  if (day) return day + "天" + hours + "小时" + minutes + "分";
+  if (hours) return hours + "小时" + minutes + "分" + seconds + "秒";
+  if (minutes) return minutes + "分" + seconds + "秒";
+  if (seconds) return seconds + "秒";
+  return "时间到！";
+}
+let timeStamp = 10 * 1000
+let timer = setInterval(() => {
+  timeStamp -=1000
+  if (timeStamp < 0) {
+    clearInterval(timer)
+    return
+  }
+  console.log(format_time(timeStamp))
+}, 1000)
+
+// 闭包
+for (var i=0; i< 5; i++) {
+  setTimeout((function(index) {
+    return function() {
+      console.log(index)
+    }
+  })(i), 1000)
+}
+// setTimeout第三个参数
+for (var i=0; i< 5; i++) {
+  setTimeout((function(index) {
+    console.log(index)
+  }), 1000, i)
+}
+// es6
+for (let i=0; i< 5; i++) {
+  setTimeout((function() {
+    console.log(i)
+  }), 1000)
+}
+</script>
