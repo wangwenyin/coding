@@ -1,2 +1,1 @@
-# coding
-随便敲点
+LEARNING EVERY DAY!
